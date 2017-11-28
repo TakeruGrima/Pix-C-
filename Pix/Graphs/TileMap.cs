@@ -101,6 +101,16 @@ namespace Pix.Graphs
             return '1';
         }
 
+        //Set a column of the tileMap to 0
+        public void ClearTileMap(int i)
+        {
+            foreach (List<char> list in tileMap)
+            {
+                int id = tileMap.IndexOf(list);
+                tileMap[id, i] = '0';
+            }
+        }
+
         #endregion
 
         #region Draw

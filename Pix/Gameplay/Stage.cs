@@ -22,14 +22,14 @@ namespace Pix.Gameplay
         Collision Collision;//class to manage collision between map and character and character to character
         string levelName;//Name of the stage
 
-        int effaceX =0;//x coordinate to clear the screen
-        float time=0;
+        int effaceX = 0;//x coordinate to clear the screen
+        float time = 0;
 
         #endregion
 
         #region Constructor
 
-        public Stage(string path,string levelName)//path is the path of the file map
+        public Stage(string path, string levelName)//path is the path of the file map
         {
             this.levelName = levelName;
 
@@ -53,14 +53,22 @@ namespace Pix.Gameplay
 
         public void Update(GameTime gameTime)
         {
-            foreach (Character  character in Characters)
+            if (player.state != State.DEAD)
             {
-                character.Update(gameTime);
+                foreach (Character character in Characters)
+                {
+                    character.Update(gameTime);
+                }
             }
 
             if (player.state == State.DEAD)
             {
-                Characters.Remove(player);
+                player.flip = true;
+
+                foreach (Character character in Characters)
+                {
+                    character.UpdateDead(gameTime);
+                }
             }
         }
 
@@ -70,9 +78,21 @@ namespace Pix.Gameplay
 
         public void Draw(GameTime gameTime)
         {
-            Map.Draw(gameTime);
-            if (player.state != State.DEAD)
+            if (effaceX <= 800)
             {
+                Map.Draw(gameTime);
+                if (player.state == State.DEAD)
+                {
+                    for (int i = 0; i < effaceX; i = i + 4)
+                    {
+                        PrimitivGraphics.Instance.DrawLine(i, 0, "Vertical", 4, 600, Color.Black);
+                    }
+                    if ((effaceX+4) % Map.Size == 0)
+                    {
+                        Map.ClearTileMap(effaceX / 32);
+                    }
+                    effaceX += 4;
+                }
                 foreach (Character character in Characters)
                 {
                     if (character == player)
@@ -81,17 +101,6 @@ namespace Pix.Gameplay
                     }
                     else
                         character.Draw(gameTime);
-                }
-            }
-            else if(player.state == State.DEAD)
-            {
-                if (effaceX < 800)
-                {
-                    for (int i = 0; i < effaceX; i = i + 4)
-                    {
-                        PrimitivGraphics.Instance.DrawLine(i, 0, "Vertical", 4, 600, Color.Black);
-                    }
-                    effaceX += 2;
                 }
             }
         }

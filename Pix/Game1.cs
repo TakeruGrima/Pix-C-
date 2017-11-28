@@ -20,11 +20,9 @@ namespace Pix
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        /*  Map map;
-          Player player;
-          Npc npc;
-          Collision collision;*/
         Stage stage;
+        TitleScreen titleScreen;
+
         #endregion
 
         #region GameConstructor
@@ -51,16 +49,8 @@ namespace Pix
         {
             // TODO: Add your initialization logic here
 
-           /* map = new Map("Map/Map1.txt");
-
-            List<Character> characters = new List<Character>();
-            characters.Add(player);
-            characters.Add(npc);
-            collision = new Collision(map,characters);
-            player = new Player(new Vector2(23 * 32, 50), "Sprites/player.txt", collision);
-            npc = new Npc(new Vector2(18 * 32, 32), "Sprites/ghost.txt", collision);*/
-
             stage = new Stage("Map/Map1.txt", "Level 1");
+            titleScreen = new TitleScreen();
             base.Initialize();
         }
 
@@ -81,6 +71,8 @@ namespace Pix
             PrimitivGraphics.Instance.GraphicsDevice = GraphicsDevice;
             PrimitivGraphics.Instance.SpriteBatch = spriteBatch;
             PrimitivGraphics.Instance.LoadContent();
+
+            titleScreen.LoadContent(Content);
         }
 
         /// <summary>
@@ -109,7 +101,11 @@ namespace Pix
             // TODO: Add your update logic here
             /* player.Update(gameTime);
              npc.Update(gameTime);*/
-            stage.Update(gameTime);
+            if (!titleScreen.play)
+                titleScreen.Update(gameTime);
+            else
+                stage.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -127,10 +123,14 @@ namespace Pix
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-               /*map.Draw(gameTime);
-               player.Draw(gameTime);
-               npc.Draw(gameTime);*/
-            stage.Draw(gameTime);
+            /*map.Draw(gameTime);
+            player.Draw(gameTime);
+            npc.Draw(gameTime);*/
+
+            if (!titleScreen.play)
+                titleScreen.Draw(gameTime);
+            else
+                stage.Draw(gameTime);
 
             spriteBatch.End();
             base.Draw(gameTime);

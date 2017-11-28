@@ -59,6 +59,40 @@ namespace Pix.Gameplay.Sprites
             life = new Life(3, new Vector2(0, 600 - 32));
         }
 
+        //without collision
+        public Player(Vector2 position, string filePath) :
+            base(position, filePath)
+        {
+            anims = new Dictionary<string, Animation>();
+
+            Animation idle = new Animation();
+            idle.Add(sprites[0]);
+
+            anims.Add("idle", idle);
+
+            Animation move = new Animation();
+            move.Add(sprites[0]);
+            move.Add(sprites[2]);
+            move.Add(sprites[3]);
+            move.Add(sprites[4]);
+            move.Add(sprites[3]);
+            move.Add(sprites[2]);
+            move.Add(sprites[0]);
+
+            anims.Add("move", move);
+
+            Animation jump = new Animation();
+            jump.Add(sprites[7]);
+
+            anims.Add("jump", jump);
+
+            currentAnimation = "move";
+
+            Console.WriteLine("TOI MON BEAU TOURNESOL!");
+
+            life = new Life(0, new Vector2(0, 600 - 32));
+        }
+
         #endregion
 
         #region Update
@@ -135,15 +169,9 @@ namespace Pix.Gameplay.Sprites
 
             bool collide = false;
 
-            if(collision.CollideCharacters(this))
+            if (collision.CollideCharacters(this))
             {
                 collide = true;
-            }
-
-            //Sprite falling
-            if (!standing)
-            {
-                velocity.Y += 500 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (countinvisible <= 0)
@@ -189,7 +217,7 @@ namespace Pix.Gameplay.Sprites
 
         public new void Draw(GameTime gameTime)
         {
-            if (state == State.ALIVE)
+            if (state != State.HURT)
             {
                 anims[currentAnimation].Draw(position, flip);
             }

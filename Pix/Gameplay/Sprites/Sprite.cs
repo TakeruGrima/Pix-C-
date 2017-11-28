@@ -23,7 +23,7 @@ namespace Pix.Gameplay.Sprites
 
         //create a sprite with a tab in text
         //Constructor for animation
-        public Sprite(string text,Vector2 position)
+        public Sprite(string text, Vector2 position)
         {
             graph = new List2D<char>();
 
@@ -78,39 +78,39 @@ namespace Pix.Gameplay.Sprites
 
         #region Draw
 
-        public void Draw(Vector2 position,bool flip,float opacity)
+        public void Draw(Vector2 position, bool flip, float opacity)
         {
             for (int j = 0; j < graph.Count; j++)
             {
-                if(flip == false)
+                if (flip == false)
                 {
                     for (int i = 0; i < graph[j].Count; i++)
                     {
                         if (graph[j, i] == '1')
                         {
                             PrimitivGraphics.Instance.DrawPoint((int)position.X + i * 2,
-                                (int)position.Y + j * 2, 2, Color.White,opacity);
+                                (int)position.Y + j * 2, 2, Color.White, opacity);
                         }
                         else if (graph[j, i] == '2')
                         {
                             PrimitivGraphics.Instance.DrawPoint((int)position.X + i * 2,
-                                (int)position.Y + j * 2, 2, Color.Black,1);
+                                (int)position.Y + j * 2, 2, Color.Black, 1);
                         }
                     }
                 }
                 else
                 {
-                    for (int i = graph[j].Count-1; i >=0; i--)
+                    for (int i = graph[j].Count - 1; i >= 0; i--)
                     {
                         if (graph[j, i] == '1')
                         {
-                            PrimitivGraphics.Instance.DrawPoint((int)position.X + ((graph[j].Count-1)*2 -i * 2),
-                                (int)position.Y + j * 2, 2, Color.White,opacity);
+                            PrimitivGraphics.Instance.DrawPoint((int)position.X + ((graph[j].Count - 1) * 2 - i * 2),
+                                (int)position.Y + j * 2, 2, Color.White, opacity);
                         }
                         else if (graph[j, i] == '2')
                         {
-                            PrimitivGraphics.Instance.DrawPoint((int)position.X + ((graph[j].Count-1) * 2 - i * 2),
-                                (int)position.Y + j * 2, 2, Color.Black,1);
+                            PrimitivGraphics.Instance.DrawPoint((int)position.X + ((graph[j].Count - 1) * 2 - i * 2),
+                                (int)position.Y + j * 2, 2, Color.Black, 1);
                         }
                     }
                 }

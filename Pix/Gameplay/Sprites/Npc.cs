@@ -49,10 +49,10 @@ namespace Pix.Gameplay.Sprites
         public override void Update(GameTime gameTime)
         {
             //Tile behind the sprite
-            char idOverlap = collision.Map.GetTileAt((int)position.X + collision.Map.Size / 2, 
+            char idOverlap = collision.Map.GetTileAt((int)position.X + collision.Map.Size / 2,
                 (int)position.Y);
 
-            if(idOverlap == '<')
+            if (idOverlap == '<')
             {
                 direction = "left";
             }
@@ -68,7 +68,7 @@ namespace Pix.Gameplay.Sprites
                 currentAnimation = "move";
                 flip = false;
             }
-            else if(direction == "left")
+            else if (direction == "left")
             {
                 velocity.X = -50;
                 currentAnimation = "move";

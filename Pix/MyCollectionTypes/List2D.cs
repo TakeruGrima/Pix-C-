@@ -88,6 +88,12 @@ namespace Pix.MyCollectionTypes
             arr.Remove(list);
         }
 
+        //get Id of a list in tilemap
+        public int IndexOf(List<T> list)
+        {
+            return arr.IndexOf(list);
+        }
+
         #endregion
     }
 }

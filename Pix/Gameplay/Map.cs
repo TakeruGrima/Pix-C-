@@ -46,7 +46,7 @@ namespace Pix.Gameplay
         public Map(string path)//path of the map file
         {
             Size = 32;
-            tilemap = new TileMap(path,Size);
+            tilemap = new TileMap(path, Size);
 
             playerPosition = tilemap.PlayerPosition;
             npcPosition = tilemap.NpcPosition;
@@ -57,7 +57,7 @@ namespace Pix.Gameplay
         #region methods
 
         //getTile with x and y coordinate
-        public char GetTileAt(float x,float y)
+        public char GetTileAt(float x, float y)
         {
             return tilemap.getTileAt((int)x, (int)y);
         }
@@ -78,6 +78,12 @@ namespace Pix.Gameplay
         public int GetCol(int x)
         {
             return (int)Math.Floor((float)x / Size);
+        }
+
+        //Set a column of the tileMap to 0
+        public void ClearTileMap(int i)
+        {
+            tilemap.ClearTileMap(i);
         }
 
         #endregion

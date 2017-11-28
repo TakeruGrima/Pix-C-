@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/polo/Documents/Cours/Cours Game Codeur/GameJams/GameJam11/Pix/Pix/Content/Fonts/PressStart.spritefont</SourceFile>
+  <SourceTime>2017-11-28T19:01:34.5581188+01:00</SourceTime>
+  <DestFile>C:/Users/polo/Documents/Cours/Cours Game Codeur/GameJams/GameJam11/Pix/Pix/Content/bin/Windows/Fonts/PressStart.xnb</DestFile>
+  <DestTime>2017-11-28T19:02:02.3062028+01:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2017-03-01T16:05:36+01:00</ProcessorTime>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

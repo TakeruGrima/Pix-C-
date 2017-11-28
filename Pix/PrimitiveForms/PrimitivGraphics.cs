@@ -44,9 +44,9 @@ namespace Pix.PrimitiveForms
 
         #region Draw
 
-        public void DrawPoint(int x, int y, int scale, Color color,float opacity)
+        public void DrawPoint(int x, int y, int scale, Color color, float opacity)
         {
-            texture.SetData(new [] { color });
+            texture.SetData(new[] { color });
             SpriteBatch.Draw(texture, new Rectangle(x, y, 1 * scale, 1 * scale), color * opacity);
 
             texture.SetData(new[] { Color.White });
