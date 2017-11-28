@@ -14,15 +14,20 @@ namespace Pix.Gameplay.Sprites
         #region Field region
 
         Life life;
-        float invinsible = 2;
-        float countinvisible=0;
+        float invinsible = 1;
+        float countinvisible = 0;
+        bool missJump = false;
+        int posMissJump;
+
+        bool collideRight = false;
+        bool collideLeft = false;
 
         #endregion
 
         #region Constructor
 
-        public Player(Vector2 position, string filePath,Collision collision) : 
-            base(position, filePath,collision)
+        public Player(Vector2 position, string filePath, Collision collision) :
+            base(position, filePath, collision)
         {
             anims = new Dictionary<string, Animation>();
 
@@ -49,9 +54,9 @@ namespace Pix.Gameplay.Sprites
 
             currentAnimation = "idle";
 
-            position.Y = position.Y - (size. Y - collision.Map.Size);
+            position.Y = position.Y - (size.Y - collision.Map.Size);
 
-            life = new Life(3, new Vector2(0,600 - 32));
+            life = new Life(3, new Vector2(0, 600 - 32));
         }
 
         #endregion
@@ -65,7 +70,7 @@ namespace Pix.Gameplay.Sprites
             int maxSpeed = 150;
             int jumpVelocity = -240;
 
-            if(countinvisible>0)
+            if (countinvisible > 0)
             {
                 countinvisible -= (float)(gameTime.ElapsedGameTime.TotalSeconds);
             }
@@ -124,34 +129,52 @@ namespace Pix.Gameplay.Sprites
             {
                 bJumpReady = true;
             }
-            
+
+            if (standing)
+                missJump = false;
+
+            bool collide = false;
+
+            if(collision.CollideCharacters(this))
+            {
+                collide = true;
+            }
+
             //Sprite falling
-            if(!standing)
+            if (!standing)
             {
                 velocity.Y += 500 * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-
-            if (collision.CollideCharacters(this))
+            if (countinvisible <= 0)
             {
-                if(velocity.X>0)
-                {
-                    velocity.X = -velocity.X;
-                }
-                else if (velocity.X < 0)
-                {
-                    velocity.X = -velocity.X;
-                }
+                state = State.ALIVE;
+            }
 
-                if (countinvisible <= 0)
+            if (collide)
+            {
+                if (state == State.ALIVE)
                 {
-                    life.value--;
-                    countinvisible = invinsible;
-                }
+                    if (velocity.X > 0)
+                    {
+                        velocity.X = -velocity.X;
+                    }
+                    else if (velocity.X < 0)
+                    {
+                        velocity.X = -velocity.X;
+                    }
 
-                if(life.value == 0)
-                {
-                    state = State.DEAD;
+                    if (countinvisible <= 0)
+                    {
+                        life.value--;
+                        countinvisible = invinsible;
+                        state = State.HURT;
+                    }
+
+                    if (life.value == 0)
+                    {
+                        state = State.DEAD;
+                    }
                 }
             }
 
@@ -166,7 +189,14 @@ namespace Pix.Gameplay.Sprites
 
         public new void Draw(GameTime gameTime)
         {
-            anims[currentAnimation].Draw(position, flip);
+            if (state == State.ALIVE)
+            {
+                anims[currentAnimation].Draw(position, flip);
+            }
+            else if (state == State.HURT)
+            {
+                anims[currentAnimation].DrawSemiTransparent(position, flip);
+            }
 
             life.Draw(gameTime);
         }

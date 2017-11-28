@@ -70,7 +70,12 @@ namespace Pix.Gameplay.Sprites
 
         public void Draw(Vector2 position,bool flip)
         {
-            sprites[currentFrame].Draw(position,flip);
+            sprites[currentFrame].Draw(position,flip,1);
+        }
+
+        public void DrawSemiTransparent(Vector2 position, bool flip)
+        {
+            sprites[currentFrame].Draw(position, flip,0.5f);
         }
 
         #endregion

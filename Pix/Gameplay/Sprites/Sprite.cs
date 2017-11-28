@@ -78,7 +78,7 @@ namespace Pix.Gameplay.Sprites
 
         #region Draw
 
-        public void Draw(Vector2 position,bool flip)
+        public void Draw(Vector2 position,bool flip,float opacity)
         {
             for (int j = 0; j < graph.Count; j++)
             {
@@ -89,12 +89,12 @@ namespace Pix.Gameplay.Sprites
                         if (graph[j, i] == '1')
                         {
                             PrimitivGraphics.Instance.DrawPoint((int)position.X + i * 2,
-                                (int)position.Y + j * 2, 2, Color.White);
+                                (int)position.Y + j * 2, 2, Color.White,opacity);
                         }
                         else if (graph[j, i] == '2')
                         {
                             PrimitivGraphics.Instance.DrawPoint((int)position.X + i * 2,
-                                (int)position.Y + j * 2, 2, Color.Black);
+                                (int)position.Y + j * 2, 2, Color.Black,1);
                         }
                     }
                 }
@@ -105,12 +105,12 @@ namespace Pix.Gameplay.Sprites
                         if (graph[j, i] == '1')
                         {
                             PrimitivGraphics.Instance.DrawPoint((int)position.X + ((graph[j].Count-1)*2 -i * 2),
-                                (int)position.Y + j * 2, 2, Color.White);
+                                (int)position.Y + j * 2, 2, Color.White,opacity);
                         }
                         else if (graph[j, i] == '2')
                         {
                             PrimitivGraphics.Instance.DrawPoint((int)position.X + ((graph[j].Count-1) * 2 - i * 2),
-                                (int)position.Y + j * 2, 2, Color.Black);
+                                (int)position.Y + j * 2, 2, Color.Black,1);
                         }
                     }
                 }

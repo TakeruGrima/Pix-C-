@@ -44,3 +44,26 @@ C:\Users\polo\Documents\Cours\Cours Game Codeur\GameJams\GameJam11\Pix\Pix\bin\W
 C:\Users\polo\Documents\Cours\Cours Game Codeur\GameJams\GameJam11\Pix\Pix\obj\x86\Debug\Pix.csprojResolveAssemblyReference.cache
 C:\Users\polo\Documents\Cours\Cours Game Codeur\GameJams\GameJam11\Pix\Pix\obj\x86\Debug\Pix.exe
 C:\Users\polo\Documents\Cours\Cours Game Codeur\GameJams\GameJam11\Pix\Pix\obj\x86\Debug\Pix.pdb
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\Pix.exe
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\Pix.pdb
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\obj\x86\Debug\Pix.csprojResolveAssemblyReference.cache
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\obj\x86\Debug\Pix.exe
+C:\Users\polo\Documents\Cours\GameCodeur\GameJams\GameJam11\Pix\Pix\obj\x86\Debug\Pix.pdb

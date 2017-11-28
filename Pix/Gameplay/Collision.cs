@@ -40,14 +40,14 @@ namespace Pix.Gameplay
                 return true;
             }
             if (Map.IsSolid(id1))
-             {
+            {
                  if(c.position.Y - Map.Size/4 -1 > Map.Size* Map.GetLine((int)c.position.Y -1))
                  {
                      return false;
                  }
                  return true;
-             }
-             return false;
+            }
+            return false;
         }
 
         public bool CollideLeft(Character c)
@@ -107,7 +107,62 @@ namespace Pix.Gameplay
 
         #region CollideCharacters
 
-        public bool CollideCharacters(Character c)//this character collide with others
+        public bool CollideCharRight(Character c)
+        {
+            //we use rectangles to collide
+            Rectangle characRect = CreateBounds(c);
+
+            Rectangle rightRect = new Rectangle(characRect.Right, characRect.Y,1, characRect.Height);
+
+            foreach (Character curr in Characters)
+            {
+                Rectangle currRect = CreateBounds(curr);
+
+                //we use the left boundary of the character to detect if the current character collide with
+                //the left boundary
+                Rectangle leftBound = new Rectangle(currRect.Left, currRect.Y, currRect.Width/2, currRect.Height);
+
+                if (currRect != characRect)
+                {
+                    if (rightRect.Intersects(leftBound))
+                    {
+                        Console.WriteLine("COLLIDE RIGHT");
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CollideCharLeft(Character c)
+        {
+            //we use rectangles to collide
+            Rectangle characRect = CreateBounds(c);
+
+            Rectangle leftRect = new Rectangle(characRect.Left, characRect.Y,1, characRect.Height);
+
+            foreach (Character curr in Characters)
+            {
+                Rectangle currRect = CreateBounds(curr);
+
+                //we use the right boundary of the character to detect if the current character collide with
+                //the right boundary
+                Rectangle rightBound = new Rectangle(currRect.Right - currRect.Width / 2, 
+                    currRect.Y, currRect.Width / 2, currRect.Height);
+
+                if (currRect != characRect)
+                {
+                    if (leftRect.Intersects(rightBound))
+                    {
+                        Console.WriteLine("COLLIDE LEFT");
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CollideCharTop(Character c)
         {
             //we use rectangles to collide
             Rectangle characRect = CreateBounds(c);
@@ -116,12 +171,67 @@ namespace Pix.Gameplay
             {
                 Rectangle currRect = CreateBounds(curr);
 
-                if(currRect!= characRect)
+                //we use the bottom boundary of the character to detect if the current character collide with
+                //the bottom boundary
+                Rectangle bottomBound = new Rectangle(currRect.Left, currRect.Bottom, currRect.Width, 1);
+
+                if (currRect != characRect)
                 {
-                    if(characRect.Intersects(currRect))
+                    if (characRect.Intersects(bottomBound))
                     {
-                        Console.WriteLine("COLLIDE");
+                        Console.WriteLine("COLLIDE UP");
                         return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CollideCharBottom(Character c)
+        {
+            //we use rectangles to collide
+            Rectangle characRect = CreateBounds(c);
+
+            Rectangle bottomRect = new Rectangle(characRect.Left, characRect.Bottom -16, characRect.Width, 16);
+
+            foreach (Character curr in Characters)
+            {
+                Rectangle currRect = CreateBounds(curr);
+
+                //we use the top boundary of the character to detect if the current character collide with
+                //the top boundary
+                Rectangle topBound = new Rectangle(currRect.Left, currRect.Top, currRect.Width, 1);
+
+                if (currRect != characRect)
+                {
+                    if (bottomRect.Intersects(topBound))
+                    {
+                        Console.WriteLine("COLLIDE BOTTOM");
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CollideCharacters(Character c)//this character collide with others
+        {
+            //we use rectangles to collide
+            Rectangle characRect = CreateBounds(c);
+
+            if(c.state == State.ALIVE)
+            {
+                foreach (Character curr in Characters)
+                {
+                    Rectangle currRect = CreateBounds(curr);
+
+                    if (currRect != characRect && curr.state == State.ALIVE)
+                    {
+                        if (characRect.Intersects(currRect))
+                        {
+                            Console.WriteLine("COLLIDE");
+                            return true;
+                        }
                     }
                 }
             }

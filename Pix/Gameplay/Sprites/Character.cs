@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Pix.Gameplay.Sprites
 {
+    public enum State { ALIVE, DEAD, HURT };
     class Character
     {
         #region Field region
 
-        public enum State { ALIVE,DEAD};
         public State state = State.ALIVE;
 
         public List<Sprite> sprites;//sprites for the character

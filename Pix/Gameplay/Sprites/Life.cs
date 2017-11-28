@@ -37,7 +37,7 @@ namespace Pix.Gameplay.Sprites
 
             for (int i = 0; i < value; i++)
             {
-                sprite.Draw(new Vector2(x+i, position.Y), false);
+                sprite.Draw(new Vector2(x+i, position.Y), false,1);
                 x += 32/2 + 4;
             }
         }

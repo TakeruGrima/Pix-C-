@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pix.Gameplay.Sprites;
+using Pix.PrimitiveForms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace Pix.Gameplay
         Player player;
         Collision Collision;//class to manage collision between map and character and character to character
         string levelName;//Name of the stage
+
+        int effaceX =0;//x coordinate to clear the screen
+        float time=0;
 
         #endregion
 
@@ -54,7 +58,7 @@ namespace Pix.Gameplay
                 character.Update(gameTime);
             }
 
-            if (player.state == Character.State.DEAD)
+            if (player.state == State.DEAD)
             {
                 Characters.Remove(player);
             }
@@ -67,14 +71,28 @@ namespace Pix.Gameplay
         public void Draw(GameTime gameTime)
         {
             Map.Draw(gameTime);
-            foreach (Character character in Characters)
+            if (player.state != State.DEAD)
             {
-                if (character == player)
+                foreach (Character character in Characters)
                 {
-                    player.Draw(gameTime);
+                    if (character == player)
+                    {
+                        player.Draw(gameTime);
+                    }
+                    else
+                        character.Draw(gameTime);
                 }
-                else
-                    character.Draw(gameTime);
+            }
+            else if(player.state == State.DEAD)
+            {
+                if (effaceX < 800)
+                {
+                    for (int i = 0; i < effaceX; i = i + 4)
+                    {
+                        PrimitivGraphics.Instance.DrawLine(i, 0, "Vertical", 4, 600, Color.Black);
+                    }
+                    effaceX += 2;
+                }
             }
         }
 
