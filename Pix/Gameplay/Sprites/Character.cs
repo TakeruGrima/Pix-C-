@@ -165,10 +165,24 @@ namespace Pix.Gameplay.Sprites
             }
             if (collide)
             {
-                velocity.X = 0;
-
                 int col = (int)Math.Floor((position.X + collision.Map.Size / 2) / collision.Map.Size);
                 position.X = (col) * collision.Map.Size;
+
+                if (velocity.X > 0)
+                {
+                    position.X = collision.CollisionRect.Left - collision.Map.Size;
+                }
+                if (velocity.X < 0)
+                {
+                    Console.WriteLine(position);
+                    position.X = collision.CollisionRect.Right;
+
+                    Console.WriteLine(position);
+                }
+                if (!collision.TopColide)
+                {
+                    velocity.X = 0;
+                }
             }
 
             collide = false;
@@ -180,7 +194,6 @@ namespace Pix.Gameplay.Sprites
             //When the player is dead everybody fall!!!!
             //Sprite falling
             velocity.X = 0;
-            Console.WriteLine(collision.Map.GetTileAt(0 * 32, 17 * 32));
             if (!standing)
             {
                 velocity.Y = 250 * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -188,10 +201,10 @@ namespace Pix.Gameplay.Sprites
             }
 
             //Bellow
-            if (standing )
+            if (standing)
             {
                 bool collide = collision.CollideBellow(this);
-                if(!collide)
+                if (!collide)
                 {
                     Console.WriteLine("PLUS DEBOUT");
                     standing = false;

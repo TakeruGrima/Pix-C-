@@ -16,6 +16,27 @@ namespace Pix.Gameplay
         public Map Map;//Stock the actual map
         List<Character> Characters;//list of characters
         Rectangle collisionRect;//represents the object which collide with character
+        bool topColide = false;//indicate that the collision is above the character
+
+        #endregion
+
+        #region Property
+
+        public Rectangle CollisionRect
+        {
+            get
+            {
+                return collisionRect;
+            }
+        }
+
+        public bool TopColide
+        {
+            get
+            {
+                return topColide;
+            }
+        }
 
         #endregion
 
@@ -41,8 +62,41 @@ namespace Pix.Gameplay
 
             if (Map.IsSolid(id2))
             {
-                collisionRect = new Rectangle(Map.GetCol((int)(c.position.X + Map.Size)),
-                    Map.GetLine((int)c.position.Y + 3), 4, Map.Size);
+                if(Map.IsSolid(id1))
+                {
+                    //this condition is here to manage the collision between the character and a plateform at his top
+                    //in our code a plateform is just a line
+
+                    //we create a rectangle that correspond to the player
+                    Rectangle characRect = CreateBounds(c);
+
+                    //we create another rectangle for the plateform with a height of 3 to insure that the player don't
+                    //pass through the plateform
+                    Rectangle plateform = new Rectangle(Map.GetCol((int)c.position.X + Map.Size) * Map.Size,
+                        Map.GetLine((int)c.position.Y + 3) * Map.Size, Map.Size, 5);
+
+                    //we test if the two Rectangle don't intersects each other if they don't we return that
+                    //the character don't collide
+                    if (!characRect.Intersects(plateform))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        //collision happend
+                        //we set the collisionRect = characterrect + Map.Size but we increment the y coordinate 
+                        collisionRect = characRect;
+                        collisionRect.X += Map.Size;
+                        collisionRect.Y = plateform.Bottom + 1;
+
+                        topColide = true;
+                        return true;
+                    }
+                }
+
+                Console.WriteLine("CollisionID2");
+                collisionRect = new Rectangle(Map.GetCol((int)(c.position.X + Map.Size)) * Map.Size,
+                    Map.GetLine((int)c.position.Y + Map.Size - 4) * Map.Size, 4, Map.Size);
                 return true;
             }
             if (Map.IsSolid(id1))
@@ -53,10 +107,10 @@ namespace Pix.Gameplay
                 //we create a rectangle that correspond to the player
                 Rectangle characRect = CreateBounds(c);
 
-                //we create another rectangle for the plateform with a height of 5 to insure that the player don't
+                //we create another rectangle for the plateform with a height of 3 to insure that the player don't
                 //pass through the plateform
-                Rectangle plateform = new Rectangle(Map.GetCol((int)c.position.X) * Map.Size,
-                    Map.GetLine((int)c.position.Y + 3) * Map.Size, Map.Size, 2);
+                Rectangle plateform = new Rectangle(Map.GetCol((int)c.position.X + Map.Size) * Map.Size,
+                    Map.GetLine((int)c.position.Y + 3) * Map.Size, Map.Size, 5);
 
                 //we test if the two Rectangle don't intersects each other if they don't we return that
                 //the character don't collide
@@ -64,8 +118,16 @@ namespace Pix.Gameplay
                 {
                     return false;
                 }
-                collisionRect = new Rectangle(Map.GetCol((int)(c.position.X + Map.Size)),
-                    Map.GetLine((int)c.position.Y+Map.Size - 4), 4, Map.Size);
+                else
+                {
+                    //collision happend
+                    //we set the collisionRect = characterrect + Map.Size but we increment the y coordinate 
+                    collisionRect = characRect;
+                    collisionRect.X += Map.Size;
+                    collisionRect.Y = plateform.Bottom + 1;
+                }
+
+                Console.WriteLine("CollisionID1");
                 return true;
             }
             return false;
@@ -81,6 +143,42 @@ namespace Pix.Gameplay
 
             if (Map.IsSolid(id2))
             {
+                if (Map.IsSolid(id1))
+                {
+                    //this condition is here to manage the collision between the character and a plateform at his top
+                    //in our code a plateform is just a line
+
+                    //we create a rectangle that correspond to the player
+                    Rectangle characRect = CreateBounds(c);
+
+                    //we create another rectangle for the plateform with a height of 3 to insure that the player don't
+                    //pass through the plateform
+                    Rectangle plateform = new Rectangle(Map.GetCol((int)c.position.X - 1) * Map.Size,
+                        Map.GetLine((int)c.position.Y + 3) * Map.Size, Map.Size, 5);
+
+                    //we test if the two Rectangle don't intersects each other if they don't we return that
+                    //the character don't collide
+                    if (!characRect.Intersects(plateform))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        //collision happend
+                        //we set the collisionRect = characterrect + Map.Size but we increment the y coordinate 
+                        collisionRect = characRect;
+                        collisionRect.X -= Map.Size;
+                        collisionRect.Y = plateform.Bottom + 1;
+                        collisionRect.Width = Map.Size;
+
+                        topColide = true;
+                        return true;
+                    }
+                }
+
+                Console.WriteLine("CollisionID2");
+                collisionRect = new Rectangle(Map.GetCol((int)c.position.X - 1) * Map.Size,
+                    Map.GetLine((int)c.position.Y + Map.Size - 4) * Map.Size, Map.Size, Map.Size);
                 return true;
             }
             if (Map.IsSolid(id1))
@@ -94,7 +192,7 @@ namespace Pix.Gameplay
                 //we create another rectangle for the plateform with a height of 3 to insure that the player don't
                 //pass through the plateform
                 Rectangle plateform = new Rectangle(Map.GetCol((int)c.position.X - 1) * Map.Size,
-                    Map.GetLine((int)c.position.Y + 3) * Map.Size, Map.Size, 2);
+                    Map.GetLine((int)c.position.Y + 3) * Map.Size, Map.Size, 5);
 
                 //we test if the two Rectangle don't intersects each other if they don't we return that
                 //the character don't collide
@@ -102,7 +200,22 @@ namespace Pix.Gameplay
                 {
                     return false;
                 }
-                return true;
+                else
+                {
+                    //collision happend
+                    //we set the collisionRect = characterrect + Map.Size but we increment the y coordinate 
+                    collisionRect = characRect;
+
+                    Console.WriteLine(characRect);
+                    collisionRect.X -= Map.Size;
+                    collisionRect.Y = plateform.Bottom + 1;
+                    collisionRect.Width = Map.Size;
+
+                    Console.WriteLine(collisionRect);
+
+                    topColide = true;
+                    return true;
+                }
             }
             return false;
         }
@@ -123,13 +236,10 @@ namespace Pix.Gameplay
                 //we create a rectangle that correspond to the player
                 Rectangle characRect = CreateBounds(c);
 
-                Console.WriteLine(characRect);
                 //we create another rectangle for the plateform with a height of 3 to insure that the player don't
                 //pass through the plateform
                 Rectangle plateform = new Rectangle(Map.GetCol((int)c.position.X + 1) * Map.Size,
                     Map.GetLine((int)c.position.Y - 1) * Map.Size, Map.Size, 5);
-
-                Console.WriteLine(plateform);
 
                 //we test if the two Rectangle intersects each other if they do we return that
                 //the character collide
@@ -257,7 +367,6 @@ namespace Pix.Gameplay
                 {
                     if (rightRect.Intersects(leftBound))
                     {
-                        Console.WriteLine("COLLIDE RIGHT");
                         return true;
                     }
                 }
@@ -285,7 +394,6 @@ namespace Pix.Gameplay
                 {
                     if (leftRect.Intersects(rightBound))
                     {
-                        Console.WriteLine("COLLIDE LEFT");
                         return true;
                     }
                 }
@@ -310,7 +418,6 @@ namespace Pix.Gameplay
                 {
                     if (characRect.Intersects(bottomBound))
                     {
-                        Console.WriteLine("COLLIDE UP");
                         return true;
                     }
                 }
@@ -337,7 +444,6 @@ namespace Pix.Gameplay
                 {
                     if (bottomRect.Intersects(topBound))
                     {
-                        Console.WriteLine("COLLIDE BOTTOM");
                         return true;
                     }
                 }
@@ -360,7 +466,6 @@ namespace Pix.Gameplay
                     {
                         if (characRect.Intersects(currRect))
                         {
-                            Console.WriteLine("COLLIDE");
                             return true;
                         }
                     }

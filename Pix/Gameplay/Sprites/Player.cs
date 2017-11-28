@@ -102,7 +102,7 @@ namespace Pix.Gameplay.Sprites
             int accel = 500;
             int friction = 280;
             int maxSpeed = 150;
-            int jumpVelocity = -240;
+            int jumpVelocity = -225;
 
             if (countinvisible > 0)
             {

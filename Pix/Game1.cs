@@ -73,6 +73,7 @@ namespace Pix
             PrimitivGraphics.Instance.LoadContent();
 
             titleScreen.LoadContent(Content);
+            stage.LoadContet(Content);
         }
 
         /// <summary>
@@ -102,7 +103,9 @@ namespace Pix
             /* player.Update(gameTime);
              npc.Update(gameTime);*/
             if (!titleScreen.play)
+            {
                 titleScreen.Update(gameTime);
+            }
             else
                 stage.Update(gameTime);
 

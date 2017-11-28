@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Pix.Gameplay.Sprites;
 using Pix.PrimitiveForms;
 using System;
@@ -23,7 +25,11 @@ namespace Pix.Gameplay
         string levelName;//Name of the stage
 
         int effaceX = 0;//x coordinate to clear the screen
-        float time = 0;
+
+        SpriteFont gameOverFont;
+        Vector2 gameOverPos;
+
+        public bool gameOver = false;
 
         #endregion
 
@@ -74,6 +80,20 @@ namespace Pix.Gameplay
 
         #endregion
 
+        #region Content
+
+        public void LoadContet(ContentManager content)
+        {
+            gameOverFont =content.Load<SpriteFont>("Fonts/GameOver");
+
+            Vector2 dimension = gameOverFont.MeasureString("Game Over");
+
+            gameOverPos.X = 800 / 2 - (int)dimension.X / 2;
+            gameOverPos.Y = 600 / 2 - (int)dimension.Y / 2;
+        }
+
+        #endregion
+
         #region Draw
 
         public void Draw(GameTime gameTime)
@@ -92,6 +112,8 @@ namespace Pix.Gameplay
                         Map.ClearTileMap(effaceX / 32);
                     }
                     effaceX += 4;
+                    PrimitivGraphics.Instance.SpriteBatch.DrawString(gameOverFont,
+                    "Game Over", gameOverPos, Color.White);
                 }
                 foreach (Character character in Characters)
                 {
@@ -102,6 +124,10 @@ namespace Pix.Gameplay
                     else
                         character.Draw(gameTime);
                 }
+            }
+            else
+            {
+                gameOver = true;
             }
         }
 
