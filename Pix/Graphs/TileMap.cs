@@ -48,6 +48,14 @@ namespace Pix.Graphs
             }
         }
 
+        public Vector2 MapSizeInPixel
+        {
+            get
+            {
+                return new Vector2((tileMap[0].Count-1) * size, tileMap.Count * size);
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -115,7 +123,7 @@ namespace Pix.Graphs
 
         #region Draw
 
-        public void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime,Camera camera)
         {
             for (int j = 0; j < tileMap.Count; j++)
             {
@@ -123,7 +131,8 @@ namespace Pix.Graphs
                 {
                     if(tileMap[j,i] == '1')
                     {
-                        PrimitivGraphics.Instance.DrawLine(i * Size, j * Size, "Horizontal", 2, 16, Color.White);
+                        PrimitivGraphics.Instance.DrawLine(i * Size - (int)camera.Position.X, 
+                            j * Size - (int)camera.Position.Y, "Horizontal", 2, 16, Color.White);
                     }
                 }
             }
