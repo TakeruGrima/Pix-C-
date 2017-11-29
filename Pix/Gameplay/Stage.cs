@@ -82,7 +82,7 @@ namespace Pix.Gameplay
 
         #region Content
 
-        public void LoadContet(ContentManager content)
+        public void LoadContent(ContentManager content)
         {
             gameOverFont =content.Load<SpriteFont>("Fonts/GameOver");
 
@@ -100,7 +100,7 @@ namespace Pix.Gameplay
         {
             if (effaceX <= 800)
             {
-                Map.Draw(gameTime);
+                Map.Draw(gameTime,player.Camera);
                 if (player.state == State.DEAD)
                 {
                     for (int i = 0; i < effaceX; i = i + 4)
@@ -122,7 +122,7 @@ namespace Pix.Gameplay
                         player.Draw(gameTime);
                     }
                     else
-                        character.Draw(gameTime);
+                        character.Draw(gameTime,player.Camera);
                 }
             }
             else

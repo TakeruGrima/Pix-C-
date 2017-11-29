@@ -54,6 +54,14 @@ namespace Pix.Gameplay
 
         public bool CollideRightRect(Character c)
         {
+            if (c.position.X + Map.Size >= Map.MapSizeInPixel.X)
+            {
+                collisionRect = new Rectangle((int)Map.MapSizeInPixel.X,
+                    (int)c.position.Y, 4, Map.Size);
+
+                return true;
+            }
+
             //We use two position to check the collision to make sure that the player don't miss his jump
             //we can have our player between two tiles the up tile and down tile we test both 
 
@@ -62,7 +70,7 @@ namespace Pix.Gameplay
 
             if (Map.IsSolid(id2))
             {
-                if(Map.IsSolid(id1))
+                if (Map.IsSolid(id1))
                 {
                     //this condition is here to manage the collision between the character and a plateform at his top
                     //in our code a plateform is just a line
@@ -135,6 +143,13 @@ namespace Pix.Gameplay
 
         public bool CollideLeftRect(Character c)
         {
+            if (c.position.X <= 0)
+            {
+                collisionRect = new Rectangle(-4,
+                    (int)c.position.Y, 4, Map.Size);
+
+                return true;
+            }
             //We use two position to check the collision to make sure that the player don't miss his jump
             //we can have our player between two tiles the up tile and down tile we test both 
 

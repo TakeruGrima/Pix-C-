@@ -68,13 +68,15 @@ namespace Pix.Gameplay.Sprites
 
         #region Draw
 
-        public void Draw(Vector2 position, bool flip)
+        public void Draw(Camera camera, Vector2 position, bool flip)
         {
+            position -= camera.Position;
             sprites[currentFrame].Draw(position, flip, 1);
         }
 
-        public void DrawSemiTransparent(Vector2 position, bool flip)
+        public void DrawSemiTransparent(Camera camera, Vector2 position, bool flip)
         {
+            position -= camera.Position;
             sprites[currentFrame].Draw(position, flip, 0.5f);
         }
 

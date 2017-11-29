@@ -16,11 +16,17 @@ namespace Pix.Gameplay.Sprites
         Life life;
         float invinsible = 1;
         float countinvisible = 0;
-        bool missJump = false;
-        int posMissJump;
 
-        bool collideRight = false;
-        bool collideLeft = false;
+        Camera camera;//we use a camera to follow the player
+
+        #endregion
+
+        #region Property Region
+
+        public Camera Camera
+        {
+            get { return camera; }
+        }
 
         #endregion
 
@@ -57,6 +63,8 @@ namespace Pix.Gameplay.Sprites
             position.Y = position.Y - (size.Y - collision.Map.Size);
 
             life = new Life(3, new Vector2(0, 600 - 32));
+
+            camera = new Camera(new Rectangle(0, 0, 800, 600),collision.Map);
         }
 
         //without collision
@@ -91,6 +99,8 @@ namespace Pix.Gameplay.Sprites
             Console.WriteLine("TOI MON BEAU TOURNESOL!");
 
             life = new Life(0, new Vector2(0, 600 - 32));
+
+            camera = new Camera(new Rectangle(0, 0, 800, 600));
         }
 
         #endregion
@@ -158,14 +168,16 @@ namespace Pix.Gameplay.Sprites
                 currentAnimation = "jump";
             }
 
+            if(velocity!= Vector2.Zero)
+            {
+                camera.LockToSprite(this);
+            }
+
 
             if (!Keyboard.GetState().IsKeyDown(Keys.Up) && !bJumpReady)
             {
                 bJumpReady = true;
             }
-
-            if (standing)
-                missJump = false;
 
             bool collide = false;
 
@@ -219,11 +231,11 @@ namespace Pix.Gameplay.Sprites
         {
             if (state != State.HURT)
             {
-                anims[currentAnimation].Draw(position, flip);
+                anims[currentAnimation].Draw(camera,position, flip);
             }
             else if (state == State.HURT)
             {
-                anims[currentAnimation].DrawSemiTransparent(position, flip);
+                anims[currentAnimation].DrawSemiTransparent(camera,position, flip);
             }
 
             life.Draw(gameTime);

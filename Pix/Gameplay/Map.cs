@@ -39,6 +39,14 @@ namespace Pix.Gameplay
             }
         }
 
+        public Vector2 MapSizeInPixel
+        {
+            get
+            {
+                return tilemap.MapSizeInPixel;
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -90,9 +98,9 @@ namespace Pix.Gameplay
 
         #region Draw
 
-        public void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime,Camera camera)//camera determine what part of the map to draw
         {
-            tilemap.Draw(gameTime);
+            tilemap.Draw(gameTime,camera);
         }
 
         #endregion

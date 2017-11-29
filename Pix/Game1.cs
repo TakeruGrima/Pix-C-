@@ -73,7 +73,7 @@ namespace Pix
             PrimitivGraphics.Instance.LoadContent();
 
             titleScreen.LoadContent(Content);
-            stage.LoadContet(Content);
+            stage.LoadContent(Content);
         }
 
         /// <summary>
@@ -102,12 +102,27 @@ namespace Pix
             // TODO: Add your update logic here
             /* player.Update(gameTime);
              npc.Update(gameTime);*/
+
+            if (titleScreen.play)
+            {
+                if (stage.gameOver)
+                {
+                    stage = new Stage("Map/Map1.txt", "Level 1");
+                    stage.LoadContent(Content);
+
+                    titleScreen = new TitleScreen();
+                    titleScreen.LoadContent(Content);
+                    titleScreen.play = false;
+                }
+                else
+                {
+                    stage.Update(gameTime);
+                }
+            }
             if (!titleScreen.play)
             {
                 titleScreen.Update(gameTime);
             }
-            else
-                stage.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -125,10 +140,6 @@ namespace Pix
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
-            /*map.Draw(gameTime);
-            player.Draw(gameTime);
-            npc.Draw(gameTime);*/
 
             if (!titleScreen.play)
                 titleScreen.Draw(gameTime);

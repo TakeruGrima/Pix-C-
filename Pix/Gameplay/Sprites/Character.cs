@@ -216,9 +216,9 @@ namespace Pix.Gameplay.Sprites
 
         #region Draw
 
-        public void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime, Camera camera)//determine where to draw the character
         {
-            anims[currentAnimation].Draw(position, flip);
+            anims[currentAnimation].Draw(camera,position, flip);
         }
 
         #endregion
