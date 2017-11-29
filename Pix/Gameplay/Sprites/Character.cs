@@ -143,8 +143,10 @@ namespace Pix.Gameplay.Sprites
                     standing = true;
                     velocity.Y = 0;
 
-                    int line = (int)Math.Floor((position.Y + collision.Map.Size / 2) / collision.Map.Size);
-                    position.Y = line * collision.Map.Size - (size.Y - collision.Map.Size) + 2;
+                    position.Y = collision.CollisionRect.Top - collision.Map.Size - 
+                        (size.Y  - collision.Map.Size) +2;
+                    /*int line = (int)Math.Floor((position.Y + collision.Map.Size / 2) / collision.Map.Size);
+                    position.Y = line * collision.Map.Size - (size.Y - collision.Map.Size) + 2;*/
                 }
                 else
                 {

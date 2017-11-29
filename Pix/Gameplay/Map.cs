@@ -78,14 +78,14 @@ namespace Pix.Gameplay
             return false;
         }
 
-        public int GetLine(int y)
+        public int GetLine(float y)
         {
-            return (int)Math.Floor((float)y / Size);
+            return (int)Math.Floor(y / Size);
         }
 
-        public int GetCol(int x)
+        public int GetCol(float x)
         {
-            return (int)Math.Floor((float)x / Size);
+            return (int)Math.Floor(x / Size);
         }
 
         //Set a column of the tileMap to 0

@@ -52,7 +52,7 @@ namespace Pix.Graphs
         {
             get
             {
-                return new Vector2((tileMap[0].Count-1) * size, tileMap.Count * size);
+                return new Vector2(tileMap[0].Count * size, tileMap.Count * size);
             }
         }
 
@@ -60,7 +60,7 @@ namespace Pix.Graphs
 
         #region Constructor
 
-        public TileMap(string path,int size)
+        public TileMap(string path, int size)
         {
             this.size = size;
             tileMap = new List2D<char>();
@@ -77,11 +77,11 @@ namespace Pix.Graphs
                     {
                         lineList.Add(line[i]);
 
-                        if(line[i] =='P')//indicate that the player start here
+                        if (line[i] == 'P')//indicate that the player start here
                         {
                             playerPosition = new Vector2(i * Size, tileMap.Count * Size);
                         }
-                        if(line[i] == '@')
+                        if (line[i] == '@')
                         {
                             npcPosition.Add(new Vector2(i * Size, tileMap.Count * Size));
                         }
@@ -97,14 +97,14 @@ namespace Pix.Graphs
         #region methods
 
         //getTile with x and y coordinate
-        public char getTileAt(int x,int y)
+        public char getTileAt(int x, int y)
         {
             int l = (int)Math.Floor((float)y / Size);
             int c = (int)Math.Floor((float)x / Size);
 
             if (l < 0)
                 return '0';
-            if(l>=0 && c>=0 && l< tileMap.Count*size && c<tileMap[0].Count*size)
+            if (l >= 0 && c >= 0 && l < tileMap.Count * size && c < tileMap[0].Count * size)
                 return tileMap[l, c];
             return '1';
         }
@@ -123,15 +123,15 @@ namespace Pix.Graphs
 
         #region Draw
 
-        public void Draw(GameTime gameTime,Camera camera)
+        public void Draw(GameTime gameTime, Camera camera)
         {
             for (int j = 0; j < tileMap.Count; j++)
             {
                 for (int i = 0; i < tileMap[j].Count; i++)
                 {
-                    if(tileMap[j,i] == '1')
+                    if (tileMap[j, i] == '1')
                     {
-                        PrimitivGraphics.Instance.DrawLine(i * Size - (int)camera.Position.X, 
+                        PrimitivGraphics.Instance.DrawLine(i * Size - (int)camera.Position.X,
                             j * Size - (int)camera.Position.Y, "Horizontal", 2, 16, Color.White);
                     }
                 }
